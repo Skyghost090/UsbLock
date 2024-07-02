@@ -5,6 +5,7 @@
 ### RULES
 * Please before eject your unit umount dm mountpoint
 * Please configure a 1 device
+* After execute param -r reboot system before create other unit
 
 ### OPTIONS
 * -l: for lock a unit
