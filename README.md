@@ -9,3 +9,6 @@
 ### OPTIONS
 * -l: for lock a unit
 * -r: for remove device
+
+## How to build
+* Only run "make" on the shell
