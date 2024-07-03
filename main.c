@@ -36,7 +36,7 @@ int lockUnit(char unitStorage[]){
     //printf("%s", lockCommand); //to print a full command
     if(system(lockCommand) || system("mkfs.ext4 /dev/mapper/private") != 0){
         printf("Failed to create ecryption unit\n");
-        exit(2);
+        return 2;
     }
 
     chdir("/etc/systemd/system");
@@ -45,13 +45,18 @@ int lockUnit(char unitStorage[]){
     fclose(fileService);
     if(system(installService) != 0){
         printf("Failed to create a service for encryption\n");
-        exit(3);
+        return 3;
     }
+    return 0;
 }
 
-void serviceRemove(){
-    system("rm /etc/systemd/system/usblock*");
+int serviceRemove(){
+    if(system("rm /etc/systemd/system/usblock*") != 0){
+        printf("No have a service\n");
+        return 4;
+    }
     printf("Please format your unit\n");
+    return 0;
 }
 
 int main(int argc, char *argv[]){
@@ -65,10 +70,10 @@ int main(int argc, char *argv[]){
         printf("%s", helpString);
         return 0;
     } else if(argv[1] && argv[2] && strcmp("-l", argv[1]) == 0){
-        lockUnit(argv[2]);
+        exit(lockUnit(argv[2]));
     } else if(argv[1] && strcmp("-r", argv[1]) == 0){
-        serviceRemove();
+        exit(serviceRemove());
     } else {
-        errorMsg();
+        exit(errorMsg());
     }
 }
