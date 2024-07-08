@@ -29,7 +29,7 @@ int lockUnit(char unitStorage[]){
 
     gnutls_x509_privkey_deinit(key);
     gnutls_global_deinit();
-    sprintf(lockCommand, "%s %s %s", lockCommand, unitStorage, lockCommand2);
+    sprintf(lockCommand, "cryptsetup open --type plain %s private --key-file private_key.txt", unitStorage);
     createId = rand();
     sprintf(serviceName, "usblock%i.service", createId);
     sprintf(installService, "systemctl enable %s", serviceName);
@@ -48,6 +48,7 @@ int lockUnit(char unitStorage[]){
         return 3;
     }
     return 0;
+    printf("Please reboot system\n");
 }
 
 int serviceRemove(){
