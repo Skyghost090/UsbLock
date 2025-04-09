@@ -1,16 +1,47 @@
-# UsbLock
-## A service to automatic mount encrypted storage unit
-### usblock [OPTIONS] [UNIT]
+# 🔐 UsbLock
 
-### RULES
-* Please before eject your unit umount dm mountpoint
-* Please configure a 1 device
-* After execute param -r reboot system before create other unit
-* Please type a unit based on /dev/disk/by-id/
+**UsbLock** is a service that automatically mounts encrypted storage devices securely and conveniently.
 
-### OPTIONS
-* -l: for lock a unit
-* -r: for remove device
+---
 
-## How to build
-* Only run "make" on the shell
+## 🚀 Usage
+
+```bash
+usblock [OPTIONS] [DEVICE]
+```
+
+### 📍 Device Format
+
+Use the persistent device path, usually found under:
+
+```
+/dev/disk/by-id/
+```
+
+---
+
+## ⚙️ Options
+
+- `-l` — 🔒 Lock (unmount and secure) the specified device  
+- `-r` — 🗑️ Remove the currently configured device  
+  ⚠️ **Important:** After running `-r`, you **must reboot** the system before configuring a new device.
+
+---
+
+## 📋 Rules & Recommendations
+
+- 💡 Always **unmount the dm-crypt mount point** before removing the USB physically.
+- ⚠️ Only **one device** can be configured at a time.
+- 🔁 After using `-r`, **reboot** before setting up a new device.
+
+---
+
+## 🛠️ Build Instructions
+
+To build UsbLock, simply run:
+
+```bash
+make
+```
+
+✅ No additional dependencies required.
