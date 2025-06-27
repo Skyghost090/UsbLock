@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g
-LIBS = -lgnutls
+LIBS = -lcryptsetup
 
 all: main
 

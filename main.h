@@ -1,17 +1,4 @@
-#include <stdbool.h>
-char helpString[] = "usblock [OPTIONS] [UNIT]\n\n[RULES]:\n* Please before eject your unit umount dm mountpoint\n* Please configure a 1 device\n* Please type a unit based on /dev/disk/by-id/\n\n[OPTIONS]:\n-l: for lock a unit\n-r: for remove device\n";
-char lockCommand[] = "cryptsetup open --type plain";
-char lockCommand2[] = "private --key-file private_key.txt";
-unsigned char output_buffer[4096];
-size_t output_size = sizeof(output_buffer);
-uid_t uid;
-char umountCommand[300];
-char mountCommand[300];
-int outStatus;
-bool conditionalUmount = false;
-char userName;
-FILE *fileService;
-char serviceName[300];
-char installService[400];
-int createId;
+#include <sys/types.h>
+char help_string[214] = "usage: usblock <path> <disk-id-path>\n<path>: refers to either a regular file or a block device.\n       WARNING: the file or device will be wiped.\n<disk-id-path>: path to disk id of /dev/disk/by-id/(diskid)\n";
 char cwd[1024];
+uid_t uid;
