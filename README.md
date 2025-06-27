@@ -7,24 +7,14 @@
 ## 🚀 Usage
 
 ```bash
-usblock [OPTIONS] [DEVICE]
+usblock [DEVICE] [DEVICE ID]
 ```
 
-### 📍 Device Format
+### 🖥️ Example
 
-Use the persistent device path, usually found under:
-
+```bash
+usblock /dev/sdb /dev/disk/by-id/usb-SanDisk_Cruzer_Blade_4C531001411123119193-0:0
 ```
-/dev/disk/by-id/
-```
-
----
-
-## ⚙️ Options
-
-- `-l` — 🔒 Lock (unmount and secure) the specified device  
-- `-r` — 🗑️ Remove the currently configured device  
-  ⚠️ **Important:** After running `-r`, you **must reboot** the system before configuring a new device.
 
 ---
 
@@ -32,16 +22,13 @@ Use the persistent device path, usually found under:
 
 - 💡 Always **unmount the dm-crypt mount point** before removing the USB physically.
 - ⚠️ Only **one device** can be configured at a time.
-- 🔁 After using `-r`, **reboot** before setting up a new device.
 
 ---
 
 ## 🛠️ Build Instructions
 
-To build UsbLock, simply run:
+To build UsbLock before install cryptsetup and simply run:
 
 ```bash
 make
 ```
-
-✅ No additional dependencies required.
