@@ -6,6 +6,10 @@
 #include <pthread.h>
 static pthread_mutex_t my_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+void open_crypt_device(){
+
+}
+
 int main(int argc, char *argv[]){
     uid = geteuid();
     if(uid != 0){
@@ -19,8 +23,6 @@ int main(int argc, char *argv[]){
             if (access(argv[1], F_OK) == 0) {
                 char command[150];
                 snprintf(command, sizeof(command), "echo $(cat private_key.txt) | cryptsetup luksOpen %s private", argv[1]);
-                //char *const args[] = {"-c",command};
-                //execv("/usr/bin/bash", args);
                 system(command);
             } else {
                 system("cryptsetup close private");
