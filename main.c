@@ -63,8 +63,10 @@ int main(int argc, char **argv)
         printf("%s", help_string);
         return 2;
     }
+
     pthread_mutex_init(&my_mutex, NULL);
     pthread_mutex_lock(&my_mutex);
+
     if (format_and_add_keyslots(argv[1]))
         return 3;
     if (build_service(argv[2]))

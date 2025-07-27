@@ -3,6 +3,16 @@
 #include <libcryptsetup.h>
 #include <unistd.h>
 
+static char get_random_bytes(int charset_size, const char charset[], FILE *urandom){
+    unsigned char random_byte;
+    if (fread(&random_byte, 1, 1, urandom) != 1) {
+        perror("Error reading from /dev/urandom");
+        fclose(urandom);
+        exit(EXIT_FAILURE);
+    }
+    return charset[random_byte % charset_size];
+}
+
 static void generate_random_string(char *str, int length) {
     static const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     static int charset_size = sizeof(charset) - 1; // Exclude null terminator
@@ -14,13 +24,7 @@ static void generate_random_string(char *str, int length) {
     }
 
     for (int i = 0; i < length; i++) {
-        unsigned char random_byte;
-        if (fread(&random_byte, 1, 1, urandom) != 1) {
-            perror("Error reading from /dev/urandom");
-            fclose(urandom);
-            exit(EXIT_FAILURE);
-        }
-        str[i] = charset[random_byte % charset_size];
+        str[i] = get_random_bytes(charset_size, charset, urandom);
     }
     str[length] = '\0'; // Null-terminate the string
 
